@@ -1,1 +1,100 @@
+in man pages use / to look for keywords and n to go down the hits and shift+n to go up
+
+in man pages g goes to the top and G goes to the bottom, use q to quit
+use curl cheat.sh/<command to search for> for indepth explanations of commands via command line
+
+p for uP n for dowN using shift as opposed to up and down arrow keys
+
+can use Ctrl+u to delete everything to the left of your cursor
+
+can use ! to run history command and !! to run the last done command
+
+touch is used for creation of files
+
+ls is used to view files
+
+use mkdir to make directories
+
+remove files with rm or directories with rmdir, can use rm -rf to remove directories with files in them
+
+use cd to change directories
+
+~ represents current user's home directory 
+
+use .. to go back a directory, or ./path/path to signify current directory
+
+whoami = current user
+
+hostname = name of current device
+
+can use touch to modify time and date of files to current time, can use -t option to set a specific time which uses YYYYMMDDhhmm as a format
+
+use ls -lisa to see hidden files designated with a dot
+
+variables represent other commands and can be found in the users bashrc file
+
+cp copies a file while moving it somewhere
+
+mv moves files ex. move <file> ./BASH which can also be used to rename said file
+
+use Ctrl+l to clear screen
+
+can use spaces to use a command on multiple values ex. touch a1 a2 a3
+
+* is a wildcard which means literally everything like touch * for all files 
+
+use ln -s <file> <name of link> which creates a symbolic link to the first mentioned file which can for example be cat'd to get the same data (map to get there)
+just using ln <file> <name of link> creates a hardlink which actually stores the contents of the specified file which means you can delete the original file and still have the data (actual destination)
+
+locate searches database for anything already installed
+whereis shows where a tool is found
+find is used for finding files which can use the -name option to search for a file by name along with -iname which is case insensitive, find can also be given a file path like find </filepath> -name juice.jpg
+find also has a -type option to find directories, links, files, etc, find -mtime <number> finds files modified within the <number> amount of days, -empty just finds empty files
+find can also use -executable to you guessed it, find executables. -maxdepth <number> defines the max amount of subdirectories the find command will look in
+
+use mkfifo to create a named pipe which doesnt store anything but instead passes it through memory
+
+can use pipes | to pass the result of commands to send it to another command
+
+ex. of full command find /<filepath> -name "<filename>" -type <filetype> -print(automatically adds newline character after each entry)
+alternatively use -printf to reference more information of files to reference ex. -printf "%i" but does not autom atically newline every entry
+
+BRACE EXPANSION
+
+code example find ./ -type d -exec ls -l {} \;
+
+touch ./find/{1..10}.txt the .. denotes first number to last number ex. 1..10 == 1 to 10
+
+find ./find/ !(what you dont want) -name *.txt == find everything that is not a .txt
+
+can stack multiple -name's in finds to get more searches ex. find ./ -name *.txt -name *.sh with each new 
+
+
+grep -i == case insensitive 
+grep -e or egrep == extended output
+grep -o == only shows what you searched for
+
+cat /etc/passwd | egrep ":[0-9]{5}:" anytime the numbers 0-9 appear 5 times next to eachother you get a match
+egrep -n prints line numbers for the results
+egrep -v /bin/bash shows everything except given values
+
+egrep /<path> -C<number> prints <number> of lines above and below with -A being just above and -B being just below
+
+cut isolates information from outputs by default without affecting the actual information ex. cut -d: -f1- -s cuts based off of : gets evry field after the first one while -s doesnt print anything not containing the delimiter
+
+& runs processes in the background while && is a logical and
+; is used to chain commands together signifying the beginning of a new command
+can use \ to continue the current command on a new line
+|| == logical or
+! == logical not
+() are used to group values and commands together (think PEMDAS)
+
+REDIRECTORs
+
+> take output from a command and send it somewhere which will be overwritten, default > is standard output
+
+redirect for example all error messages to a new file with 2>(<filename>) which you would normally send to /dev/null which is essentially a black hole 0 = standard input 1 = standard output 2 = standard error
+can have multiple redirectors in 1 command
+
+
 
