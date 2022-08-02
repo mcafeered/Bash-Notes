@@ -1,1 +1,21 @@
+make multiple directories at once
+mkdir $HOME/{1123,1134,1145,1156}
 
+make multiple directories with defferent ascending numbers
+mkdir $HOME/1123
+touch $HOME/1123/{1..5}.txt $HOME/1123/{6..9}~.txt
+
+find all files that have the .txt extension
+find $HOME/1123 -name *.txt
+
+copy all empty files that end in .txt to another directory
+find $HOME/1123 ! -name *~.txt -name *.txt -exec cp {} $HOME/CUT/ \;
+
+find empty files and print their names and inode numbers
+find /var -empty -printf "%i %f\n"
+
+find any file with a specic inode number and print it
+find /* -inum 4026532575 -printf "%f\n"
+
+using cut to get files that contain an extension and redirect them to another file
+ls $HOME/CUT/ | cut -d. -f1- -s > $HOME/CUT/names
