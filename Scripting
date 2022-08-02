@@ -19,3 +19,6 @@ find /* -inum 4026532575 -printf "%f\n"
 
 using cut to get files that contain an extension and redirect them to another file
 ls $HOME/CUT/ | cut -d. -f1- -s > $HOME/CUT/names
+
+OR with ls -l 
+ls -l $HOME/CUT | cut -d. -f1- -s | cut -d: -f1- -s | cut -d' ' -f2 > $HOME/CUT/names
