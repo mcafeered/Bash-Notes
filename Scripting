@@ -118,3 +118,8 @@ surprise if then script!
  10 }
  11 test_shadow
 
+copies the last line of passwd ($1 in this scenario) and changes its values then appends it back into passwd
+tail -1 $1 | awk -F: -v "name=$2" -v "uidgid=$3" 'BEGIN {OFS=":"} {$1=name} {$3=uidgid} {$4=uidgid} {$6="/home/"name} {$NF="/bin/bash"} {print $0}' >> $1
+
+
+md5sum $(find /bin /sbin /usr/bin /usr/sbin -executable -type f | sort | head | tail -1) | cut -d' ' -f1
