@@ -45,3 +45,62 @@ awk -F: -v "var=$A" 'BEGIN {OFS=":"} {$2=var} {print $0}' $HOME/PASS/shadow.txt
 writing one file to another while ommiting some lines
 sed '/\/bin\/false/d' $HOME/passwd | sed '/\/bin\/sh/d' > $HOME/PASS/passwd.txt
 CAN USE -e between multiple patterns in sed 
+
+can track and use argumens when making a script, reference special characters in Bash student guide for premade variables
+
+example of basic script to use for reference:
+  1 #!/bin/bash
+  2 #this is a basic function
+  3 
+  4 function print_somefun {
+  5     echo $*
+  6 }
+  7 
+  8 somefun() {
+  9     echo This is the first variable: $1
+ 10 }
+ 11 
+ 12 somefun Try this out $1 $2
+ 13 print_somefun $*
+
+another one which returns the line count of a specified file
+  1 #!/bin/bash
+  2 
+  3 lines_in_file() {
+  4     cat $1 | wc -l
+  5 }
+  6 
+  7 num_lines=$( lines_in_file $1)
+  8 
+  9 echo The file $1 has $num_lines lines in it
+ 10 echo Good Day Sir!
+
+one more
+  1 #!/bin/bash
+  2 
+  3 function f1 {
+  4     echo 'Sup'
+  5     echo 'nosup'
+  6 }
+  7 
+  8 function f2 {
+  9     echo 'sup 2'
+ 10     echo 'bye lol'
+ 11 }
+ 12 
+ 13 f3 () {
+ 14     echo 'stupid'
+ 15     echo 'gotem'
+ 16 }
+ 17 
+ 18 f4 () { echo 'im last'; echo 'or Am I'; }
+ 19 
+ 20 f1
+ 21 f2
+ 22 f3
+ 23 f4
+
+different quotes like " and ' or a lack thereof affects how the program runs, like how single quotes prints the literal of a variable while double quotes actually prints the value stored in the variable
+you can also use quotes like 'runnin around "lookin"' to put quotes within quotes (usage pending)
+
+
