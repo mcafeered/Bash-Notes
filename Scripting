@@ -100,8 +100,23 @@ one more
  22 f3
  23 f4
 
+finds .bin extensions and prints the absolute path excluding the filename then sorts and gets rid of duplicates
+find $HOME -name '*.bin' -printf "%h\n" | sort -n | uniq
+
 copies the last line of passwd ($1 in this scenario) and changes its values then appends it back into passwd
 tail -1 $1 | awk -F: -v "name=$2" -v "uidgid=$3" 'BEGIN {OFS=":"} {$1=name} {$3=uidgid} {$4=uidgid} {$6="/home/"name} {$NF="/bin/bash"} {print $0}' >> $1
 
-
+finds all executables in directories then gets the tenth value and gets its md5 hash
 md5sum $(find /bin /sbin /usr/bin /usr/sbin -executable -type f | sort | head | tail -1) | cut -d' ' -f1
+
+sorts by the GID field in /etc/passwd then gets the tenth value and prints the md5sum of its home directory
+sort -n -t: +3 /etc/passwd | head | tail -1 | awk -F':' '{print $6}' | md5sum | cut -d' ' -f1
+
+this behemoth gets the md5sums for loads of values in the given directories then organizes them into files successfully hashed and directories not hashed successfully
+touch storage error direrror
+md5sum $(find /bin /etc /var -maxdepth 3) > storage 2>error
+grep 'directory' error > direrror
+
+A=$(wc -l storage | cut -d' ' -f1)
+B=$(wc -l direrror | cut -d' ' -f1)
+echo "Successfully Hashed Files: $A" ; echo "Unsuccessfully Hashed Directories: $B"
