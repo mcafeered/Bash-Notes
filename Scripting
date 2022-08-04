@@ -103,4 +103,18 @@ one more
 different quotes like " and ' or a lack thereof affects how the program runs, like how single quotes prints the literal of a variable while double quotes actually prints the value stored in the variable
 you can also use quotes like 'runnin around "lookin"' to put quotes within quotes (usage pending)
 
+reference variable substitution for how to add or take values from variables, use colons to add, subtract, or remove values for the one particular instance where the variable is referenced
+
+surprise if then script!
+  1 #!/bin/bash
+  2 
+  3 function test_shadow () {
+  4     if [ -e /etc/shadow ] ;
+  5     then
+  6         echo 'shadow exists'
+  7     else
+  8         echo 'shadow isnt found'
+  9 fi
+ 10 }
+ 11 test_shadow
 
