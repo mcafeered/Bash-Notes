@@ -173,3 +173,100 @@ surprise if then script!
  10 }
  11 test_shadow
 
+use 'BEGIN {OFS='<special character>'}' to put the defined OFS inbetween each field given by awk 
+
+command substitution negates newlines and prints out every value of a given command like md5sum $(find ,etc>) will print the md5sum for every file the find command gets
+
+example of getting a user choice
+  1 #!/bin/bash
+  2 
+  3 function getuserchoice () {
+  4     echo "Make a choice[1,2,3]: "
+  5     read userchoice
+  6     case $userchoice in
+  7         (1) echo one ;;
+  8         (2) echo two ;;
+  9         (3) echo three ;;
+ 10         (*) echo other ;;
+ 11     esac
+ 12 }
+ 13 getuserchoice
+
+can use tar to zip files so they can be md5sum'd
+cant use pipes to put data in files, have to use a redirector
+can echo a directory/file/etc to create a string of the given item to then create a md5sum with a null value "-" at the end
+can use a \ to make a file with a space in the middle
+
+basic for of each loop
+  1 #!/bin/bash
+  2 
+  3 while [ what test ] 
+  4 do  
+  5     commands
+  6 done
+  7 
+  8 ####################
+  9 
+ 10 for <var> in <list>
+ 11 do  
+ 12     commands
+ 13 done
+ 14 
+ 15 ####################
+ 16 
+ 17 until <tests>
+ 18 do  
+ 19     commands
+ 20 done
+can still use break and continue
+
+While loop example
+  1 #!/bin/bash
+  2 
+  3 while true 
+  4 do
+  5     echo "pizza"
+  6     sleep 1
+  7 done
+      
+another while loop example
+  1 #!/bin/bash
+  2 
+  3 counter=1
+  4 while [[ $counter -le 10 ]] 
+  5 do
+  6     echo $counter
+  7     ((counter++))
+  8     # or use this to increment by 1
+  9     # counter=`expr $counter + 1`
+ 10 done
+ MUST USE GRAVE KEY TO DO THE expr COMMAND
+
+until loop example
+  1 #!/bin/bash
+  2 
+  3 a=0
+  4 until [[ $a -gt 10 ]]
+  5 do
+  6     echo $a
+  7     ((a++))
+  8 done
+
+for loop example
+  1 #!/bin/bash
+  2 
+  3 names='Mike Lola Kim Sherry Vincent Deez'
+  4 for names in $names
+  5 do
+  6     echo $names
+  7 done
+  8 echo is done
+
+range example
+  1 #!/bin/bash
+  2 
+  3 for value in {1..20..2}
+  4 do
+  5     echo $value
+  6 done
+range works the same way as it does in python with start stop step
