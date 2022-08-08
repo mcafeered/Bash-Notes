@@ -270,3 +270,14 @@ range example
   5     echo $value
   6 done
 range works the same way as it does in python with start stop step
+
+pretest KNOWLEDGE
+cut -d: -F
+awk
+sed
+grep -v -i -o -r
+find -type -exec -mtime 
+sort -n -r -t
+uniq -c
+touch -t -d
+tar -z -cvf -x
