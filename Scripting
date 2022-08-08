@@ -116,7 +116,65 @@ this behemoth gets the md5sums for loads of values in the given directories then
 touch storage error direrror
 md5sum $(find /bin /etc /var -maxdepth 3) > storage 2>error
 grep 'directory' error > direrror
-
 A=$(wc -l storage | cut -d' ' -f1)
 B=$(wc -l direrror | cut -d' ' -f1)
 echo "Successfully Hashed Files: $A" ; echo "Unsuccessfully Hashed Directories: $B"
+
+Checks for the existence of a directory and cp files into it if it does
+#!/bin/bash
+mkdir $HOME/SSH
+
+if [[ -e $HOME/.ssh ]]; then
+    cp $HOME/.ssh/* $HOME/SSH
+else 
+    echo "Run ssh-keygen"
+fi
+
+this script finds the ip address and pings it then  prints whether it was successful or not
+#!/bin/bash
+A=$(ip route | grep 'default' | cut -d' ' -f3)
+B=$(which ping)
+C=" 0% packet loss"
+D=$($B -c 6 $A | grep -Eo "$C")
+if [[ $C == $D ]]; then
+   echo "successful";
+else
+   echo "failure";
+fi
+
+This script creates files in a directory then zips them and then tars them to archive them
+mkdir "$HOME/ZIP" 
+touch $HOME/ZIP/file{1..3}
+echo 12345 | md5sum | cut -d' ' -f1 > $HOME/ZIP/file1
+echo 6789 | md5sum | cut -d' ' -f1 > $HOME/ZIP/file2
+echo abcdef | md5sum | cut -d' ' -f1 > $HOME/ZIP/file3
+cd $HOME/ZIP
+$(zip -j file.zip file1 file2 file3)
+tar -czvf 'file.tar.gz' 'file.zip'
+
+This script takes the root passwd entry and replaces it with a whole nother person than appends said entry back into the passwd file
+#!/bin/bash
+HOME=$"$HOME"
+echo "A:A:A:A:A:A:A" > idol
+name="LARRY CURLY MOE"
+mkdir "$HOME/LARRY" "$HOME/CURLY" "$HOME/MOE"
+for names in $name
+do
+uid=$(cat $HOME/$names.txt)
+cat idol | awk -F: -v "uid=$uid" -v "name=$names" -v "HOME=$HOME" 'BEGIN {OFS=":"} {$1=name} {$2="x"} {$3=uid} {$4=uid} {$5="root"} {$6="$HOME/"name} {$7="/bin/bash"} {print}' >> $HOME/passwd
+done
+
+This script finds a bunch of files then organizes and see how many of them have what octal permissions
+find /etc -type f -exec stat -c '%a' {} \; > ./A 2>/dev/null
+for x in $(cat ./A) ; do
+    if [[ $x -le 640 ]]; then
+        echo $x >> ./less3
+    elif [[ $x -ge 642 ]] ; then
+        echo $x >> ./more3
+    fi
+done
+echo 'Files w/ OCTAL Perm Values 642+:'
+cat ./more3 | sort | uniq -c | sort -nr
+echo
+echo 'Files w/ OCTAL Perm Values 0-640:'
+cat ./less3 | sort | uniq -c | sort -nr
