@@ -182,3 +182,82 @@ cat ./less3 | sort | uniq -c | sort -nr
 checks the passwd file for any entry where the last field == /bin/bash
 cat passwd | awk -F: '$NF == "bin/bash" {print}' 
 
+PRACTICE TEST ANSWERS
+function q1()
+{
+  #Valid Variables are:
+  infile=$1
+  outfile=$2
+  sed 's/cat/dog/' $1 | sed 's/Navy/Army/' >> $2
+  
+}
+function q1()
+{
+  #Valid Variables are:
+  #none
+  cat /etc/passwd | awk -F: '{print $1}'
+}
+function q1()
+{
+  #Valid Variables are:
+  filename=$1
+  cat $1 | sort -t: -k3 -n |awk -F: '{print $1}'
+}
+function q1()
+{
+  #Valid Variables are:
+  dirname=$1
+  if [[ -d $1 ]] ; then
+    ls $1 | wc -l
+  else
+    echo Invalid Directory;
+  fi
+}
+function q1()
+{
+  #Valid Variables are:
+  dirdel=$1
+  rm -rf $1
+}
+function q1()
+{
+  #Valid Variables are:
+  newfile=$1
+  filedate=$2
+  touch -t "$2"1730 $1
+}
+function q1()
+{
+  #Valid Variables are:
+  src=$1
+  dst=$2
+  match=$3
+  sed "/$3/d" $1 > $2
+}
+function q1()
+{
+  #Valid Variables are:
+  procname=$1
+  pkill $1
+}
+function q1()
+{
+  #Valid Variables are:
+  dirpath=$1
+  find $1 -type f -mtime -1 -printf "%p\n" | sort
+}
+function q1()
+{
+  #Valid Variables are:
+   fname=$1
+   digit=$(cat $fname)  
+if [[ $digit -le 9 ]]; then
+    echo "single digit"
+  elif [[ $digit -gt 9 && $digit -lt 100 ]]; then
+    echo "double digit"
+  elif [[ $digit -gt 99 && $digit -lt 1000 ]]; then
+    echo "triple digit"
+  else
+    echo Error;
+  fi
+}
