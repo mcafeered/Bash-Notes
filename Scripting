@@ -178,3 +178,7 @@ cat ./more3 | sort | uniq -c | sort -nr
 echo
 echo 'Files w/ OCTAL Perm Values 0-640:'
 cat ./less3 | sort | uniq -c | sort -nr
+
+checks the passwd file for any entry where the last field == /bin/bash
+cat passwd | awk -F: '$NF == "bin/bash" {print}' 
+
